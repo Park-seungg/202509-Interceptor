@@ -15,4 +15,13 @@ public interface PostRepository {
     </script>
     """)
     List<Post> findAll();
+
+    @Select("""
+    <script>
+    SELECT *
+    FROM post
+    WHERE id = #{id}
+    </script>
+    """)
+    Post findById(int id);
 }

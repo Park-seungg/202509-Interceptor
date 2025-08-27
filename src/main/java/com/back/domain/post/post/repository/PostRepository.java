@@ -77,10 +77,28 @@ public interface PostRepository {
 
     // WHERE title LIKE '%${kw}%' 방식도 가능
     @Select("""
-        select * 
-        from post
-        WHERE title LIKE CONCAT('%', #{kw}, '%')
-    """)
+            <script>
+                select * 
+                from post
+                <where>
+                    <choose>
+                        <when test="kwType == 'title'">
+                            title LIKE CONCAT('%', #{kw}, '%')
+                        </when>
+                        <when test="kwType == 'content'">
+                           content LIKE CONCAT('%', #{kw}, '%')
+                        </when>
+                        <otherwise>
+                            (
+                                title LIKE CONCAT('%', #{kw}, '%')
+                                OR
+                                content LIKE CONCAT('%', #{kw}, '%')
+                            )
+                        </otherwise>
+                    </choose>
+                 </where>
+              </script>
+            """)
     List<Post> search(
             @Param("kwType") String kwType,
             @Param("kw") String kw

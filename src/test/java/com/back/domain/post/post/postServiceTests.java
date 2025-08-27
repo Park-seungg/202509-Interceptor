@@ -1,4 +1,4 @@
-package com.back;
+package com.back.domain.post.post;
 
 import com.back.domain.post.post.dto.Post;
 import com.back.domain.post.post.service.PostService;
@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ActiveProfiles("test")
 @SpringBootTest
-class ApplicationTests {
+public class postServiceTests {
     @Autowired
     private PostService postService;
 

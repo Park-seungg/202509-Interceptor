@@ -36,4 +36,8 @@ public class PostService {
     public int getLastInsertId() {
         return postRepository.getLastInsertId();
     }
+
+    public void deleteById(int id) {
+        postRepository.deleteById(id);
+    }
 }

@@ -37,18 +37,26 @@ public interface PostRepository {
     int create(Post post);
 
     @Insert("""
-    <script>
-    INSERT INTO post
-    set createDate = NOW(),
-    modifyDate = NOW(),
-    title = #{title},
-    content = #{content}
-    </script>
-    """)
+            <script>
+            INSERT INTO post
+            set createDate = NOW(),
+            modifyDate = NOW(),
+            title = #{title},
+            content = #{content}
+            </script>
+            """)
     void createV2(String title, String content);
 
     @Select("""
             SELECT LAST_INSERT_ID()
             """)
     public int getLastInsertId();
+
+    @Delete("""
+            <script>
+            DELETE FROM post
+            WHERE id = #{id}
+            </script>
+            """)
+    int deleteById(int id);
 }

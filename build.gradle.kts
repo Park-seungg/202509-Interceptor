@@ -25,6 +25,8 @@ repositories {
 }
 
 dependencies {
+    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.5")
+    testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.5")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-web")
     compileOnly("org.projectlombok:lombok")
@@ -33,6 +35,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    runtimeOnly("com.h2database:h2")
 }
 
 tasks.withType<Test> {

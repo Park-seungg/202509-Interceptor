@@ -16,8 +16,8 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-    public Member findById(int i) {
-        return memberRepository.findById(i);
+    public Member findById(int id) {
+        return memberRepository.findById(id);
     }
 
     public Member findByUsername(String username) {
@@ -33,5 +33,9 @@ public class MemberService {
 
         memberRepository.create(member);
         return member.getId();
+    }
+
+    public int deleteById(int id) {
+        return memberRepository.deleteById(id);
     }
 }

@@ -10,9 +10,11 @@ public interface MemberRepository {
 
     List<Member> findAll();
 
-    Member findById(int i);
+    Member findById(int id);
 
     Member findByUsername(String username);
 
     int create(Member member);
+
+    int deleteById(int id);
 }

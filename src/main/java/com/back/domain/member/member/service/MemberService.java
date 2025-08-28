@@ -45,4 +45,8 @@ public class MemberService {
             throw new IllegalStateException("회원 수정 실패");
         }
     }
+
+    public List<Member> search(String kwType, String kw) {
+        return memberRepository.search(kwType, kw);
+    }
 }

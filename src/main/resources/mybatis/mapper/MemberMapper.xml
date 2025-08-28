@@ -59,4 +59,21 @@
             </where>
     </update>
 
+    <select id="search" resultType="Member">
+        SELECT * FROM member
+        <where>
+            <choose>
+                <when test="kwType == 'username'">
+                    username LIKE CONCAT('%', #{kw}, '%')
+                </when>
+                <when test="kwType == 'name'">
+                    name LIKE CONCAT('%', #{kw}, '%')
+                </when>
+                <when test="kwType == 'email'">
+                    email LIKE CONCAT('%', #{kw}, '%')
+                </when>
+            </choose>
+        </where>
+    </select>
+
 </mapper>

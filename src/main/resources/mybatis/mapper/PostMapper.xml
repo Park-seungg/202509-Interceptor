@@ -63,7 +63,7 @@
     </delete>
 
     <!-- 게시물 수정 -->
-    <update id="update">
+    <update id="update" >
         UPDATE post
         <set>
             modifyDate = NOW(),

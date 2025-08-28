@@ -1,4 +1,4 @@
-package com.back.domain.member.dto;
+package com.back.domain.member.member.dto;
 
 import lombok.Data;
 

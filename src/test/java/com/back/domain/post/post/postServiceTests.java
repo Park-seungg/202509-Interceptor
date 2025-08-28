@@ -15,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ActiveProfiles("test")
 @SpringBootTest
+@Transactional
 public class postServiceTests {
     @Autowired
     private PostService postService;
@@ -48,7 +49,6 @@ public class postServiceTests {
         assertThat(post.getContent()).isEqualTo("내용 3");
     }
 
-    @Transactional
     @Test
     @DisplayName("게시물 생성")
     void t4 () {
@@ -62,7 +62,6 @@ public class postServiceTests {
         assertThat(post.getContent()).isEqualTo("내용 3");
     }
 
-    @Transactional
     @Test
     @DisplayName("게시물 삭제")
     void t5 () {
@@ -74,7 +73,6 @@ public class postServiceTests {
         assertThat(posts).hasSize(1);
     }
 
-    @Transactional
     @Test
     @DisplayName("게시물 수정")
     void t6 () {
@@ -168,5 +166,22 @@ public class postServiceTests {
         assertThat(posts.get(0).getTitle()).isEqualTo("제목 0");
         assertThat(posts.get(1).getTitle()).isEqualTo("제목 2");
         assertThat(posts.get(2).getTitle()).isEqualTo("제목 1");
+    }
+
+    @Test
+    @DisplayName("게시물 수정 - 일부 데이터만 수정하기")
+    void t13 () {
+        // given: 기존 게시물 1번 불러오기
+        Post post = postService.findById(1);
+        assertThat(post).isNotNull();
+
+        // when: 제목/내용 수정
+        postService.update(1, "", "내용 1 수정");
+
+        // then: 수정 결과 확인
+        Post updatedPost = postService.findById(1);
+
+        assertThat(updatedPost.getTitle()).isEqualTo("제목 1");
+        assertThat(updatedPost.getContent()).isEqualTo("내용 1 수정");
     }
 }

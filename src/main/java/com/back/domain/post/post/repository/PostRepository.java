@@ -7,68 +7,81 @@ import java.util.List;
 
 @Mapper
 public interface PostRepository {
+
     @Select("""
-            <script>
-            SELECT * 
-            FROM post
-            </script>
-            """)
+    <script>
+    SELECT * 
+    FROM post
+    </script>
+    """)
     List<Post> findAll();
 
     @Select("""
-            <script>
-            SELECT *
-            FROM post
-            WHERE id = #{id}
-            </script>
-            """)
+    <script>
+    SELECT * 
+    FROM post
+        <if test="orderBy != null and orderBy != ''">
+        ORDER BY title ASC
+        </if>
+    </script>
+    """)
+    List<Post> findAllOrdered(
+            @Param("orderBy") String orderBy,
+            @Param("orderByDirection") String orderByDirection
+    );
+
+
+    @Select("""
+    <script>
+    SELECT * 
+    FROM post   
+    WHERE id = #{id}
+    </script>
+    """)
     Post findById(int id);
 
     @Insert("""
-            <script>
-            INSERT INTO post
-            set createDate = NOW(),
-            modifyDate = NOW(),
-            title = #{title},
-            content = #{content}
-            </script>
-            """)
+    <script>
+    INSERT INTO post
+    set createDate = NOW(),
+    modifyDate = NOW(),
+    title = #{title},
+    content = #{content}
+    </script>
+    """)
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int create(Post post);
 
     @Insert("""
-            <script>
-            INSERT INTO post
-            set createDate = NOW(),
-            modifyDate = NOW(),
-            title = #{title},
-            content = #{content}
-            </script>
-            """)
-    void createV2(String title, String content);
+    <script>
+    INSERT INTO post
+    set createDate = NOW(),
+    modifyDate = NOW(),
+    title = #{title},
+    content = #{content}
+    </script>
+    """)
+    void createV2(String title,  String content);
 
     @Select("""
-            SELECT LAST_INSERT_ID()
-            """)
+    SELECT LAST_INSERT_ID()
+    """)
     public int getLastInsertId();
 
+
     @Delete("""
-            <script>
-            DELETE FROM post
-            WHERE id = #{id}
-            </script>
-            """)
+        DELETE FROM post
+        WHERE id = #{id}
+    """)
     int deleteById(int id);
 
     @Update("""
-            <script>
-            UPDATE post
-            set modifyDate = NOW(),
+        UPDATE post
+        set modifyDate = NOW(),
             title = #{title},
             content = #{content}
-            WHERE id = #{id}
-            </script>
-            """)
+        where id = #{id}
+    """)
     int update(
             @Param("id") int id,
             @Param("title") String title,
@@ -77,28 +90,28 @@ public interface PostRepository {
 
     // WHERE title LIKE '%${kw}%' 방식도 가능
     @Select("""
-            <script>
-                select * 
-                from post
-                <where>
-                    <choose>
-                        <when test="kwType == 'title'">
-                            title LIKE CONCAT('%', #{kw}, '%')
-                        </when>
-                        <when test="kwType == 'content'">
-                           content LIKE CONCAT('%', #{kw}, '%')
-                        </when>
-                        <otherwise>
-                            (
-                                title LIKE CONCAT('%', #{kw}, '%')
-                                OR
-                                content LIKE CONCAT('%', #{kw}, '%')
-                            )
-                        </otherwise>
-                    </choose>
-                 </where>
-              </script>
-            """)
+    <script>
+        select * 
+        from post
+        <where>
+            <choose>
+                <when test="kwType == 'title'">
+                    title LIKE CONCAT('%', #{kw}, '%')
+                </when>
+                <when test="kwType == 'content'">
+                   content LIKE CONCAT('%', #{kw}, '%')
+                </when>
+                <otherwise>
+                    (
+                        title LIKE CONCAT('%', #{kw}, '%')
+                        OR
+                        content LIKE CONCAT('%', #{kw}, '%')
+                    )
+                </otherwise>
+            </choose>
+         </where>
+      </script>
+    """)
     List<Post> search(
             @Param("kwType") String kwType,
             @Param("kw") String kw

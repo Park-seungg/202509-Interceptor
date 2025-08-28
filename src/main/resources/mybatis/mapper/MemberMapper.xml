@@ -34,4 +34,14 @@
         DELETE FROM member WHERE id = #{id}
     </delete>
 
+    <update id="update">
+            UPDATE member
+            SET modifyDate = NOW(),
+                username = #{username},
+                password = #{password},
+                name = #{name},
+                email = #{email}
+            WHERE id = #{id}
+    </update>
+
 </mapper>

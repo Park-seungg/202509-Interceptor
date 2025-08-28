@@ -38,4 +38,11 @@ public class MemberService {
     public int deleteById(int id) {
         return memberRepository.deleteById(id);
     }
+
+    public void update(int id, String username, String password, String name, String email) {
+        int updatedRows = memberRepository.update(id, username, password, name, email);
+        if (updatedRows != 1) {
+            throw new IllegalStateException("회원 수정 실패");
+        }
+    }
 }

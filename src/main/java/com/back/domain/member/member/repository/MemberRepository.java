@@ -13,4 +13,6 @@ public interface MemberRepository {
     Member findById(int i);
 
     Member findByUsername(String username);
+
+    int create(Member member);
 }

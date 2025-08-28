@@ -3,16 +3,29 @@
 
 <mapper namespace="com.back.domain.member.member.repository.MemberRepository">
 
+    <!-- 다중 회원 조회 -->
     <select id="findAll" resultType="Member">
         SELECT * FROM member
     </select>
 
+    <!-- 단일 회원 조회(아이디로 조회) -->
     <select id="findById" resultType="Member">
         SELECT * FROM member WHERE id = #{id}
     </select>
 
+    <!-- 단일 회원 조회(username으로 조회) -->
     <select id="findByUsername" resultType="Member">
         SELECT * FROM member WHERE username = #{username}
     </select>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO member
+        SET createDate = NOW(),
+            modifyDate = NOW(),
+            username = #{username},
+            password = #{password},
+            name = #{name},
+            email = #{email}
+    </insert>
 
 </mapper>

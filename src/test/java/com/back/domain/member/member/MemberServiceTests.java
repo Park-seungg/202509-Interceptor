@@ -46,4 +46,19 @@ public class MemberServiceTests {
         assertThat(member.getName()).isEqualTo("유저2");
         assertThat(member.getEmail()).isEqualTo("user2@test.com");
     }
+
+    @Test
+    @DisplayName("회원 생성")
+    void t4() {
+        // when: 회원 생성
+        int id = memberService.create("user3", "{noop}1234", "유저3", "user3@test.com");
+
+        // then: 해당 id의 회원 불러오기
+        Member member = memberService.findById(id);
+
+        assertThat(member.getUsername()).isEqualTo("user3");
+        assertThat(member.getName()).isEqualTo("유저3");
+        assertThat(member.getEmail()).isEqualTo("user3@test.com");
+        assertThat(member.getPassword()).isEqualTo("{noop}1234");
+    }
 }

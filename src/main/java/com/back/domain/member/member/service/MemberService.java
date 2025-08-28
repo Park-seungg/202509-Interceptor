@@ -23,4 +23,15 @@ public class MemberService {
     public Member findByUsername(String username) {
         return memberRepository.findByUsername(username);
     }
+
+    public int create(String username, String password, String name, String email) {
+        Member member = new Member();
+        member.setUsername(username);
+        member.setPassword(password);
+        member.setName(name);
+        member.setEmail(email);
+
+        memberRepository.create(member);
+        return member.getId();
+    }
 }

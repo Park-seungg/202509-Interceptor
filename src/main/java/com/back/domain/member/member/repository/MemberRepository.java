@@ -9,4 +9,8 @@ import java.util.List;
 public interface MemberRepository {
 
     List<Member> findAll();
+
+    Member findById(int i);
+
+    Member findByUsername(String username);
 }

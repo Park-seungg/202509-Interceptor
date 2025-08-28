@@ -15,4 +15,12 @@ public class MemberService {
     public List<Member> findAll() {
         return memberRepository.findAll();
     }
+
+    public Member findById(int i) {
+        return memberRepository.findById(i);
+    }
+
+    public Member findByUsername(String username) {
+        return memberRepository.findByUsername(username);
+    }
 }

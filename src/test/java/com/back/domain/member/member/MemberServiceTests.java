@@ -27,4 +27,23 @@ public class MemberServiceTests {
 
         assertThat(members).hasSize(2);
     }
+
+    @Test
+    @DisplayName("회원 단건 조회 - ID로 조회")
+    void t2() {
+        Member member = memberService.findById(1);
+
+        assertThat(member.getUsername()).isEqualTo("user1");
+        assertThat(member.getName()).isEqualTo("유저1");
+        assertThat(member.getEmail()).isEqualTo("user1@test.com");
+    }
+
+    @Test
+    @DisplayName("회원 단건 조회 - Username으로 조회")
+    void t3() {
+        Member member = memberService.findByUsername("user2");
+
+        assertThat(member.getName()).isEqualTo("유저2");
+        assertThat(member.getEmail()).isEqualTo("user2@test.com");
+    }
 }

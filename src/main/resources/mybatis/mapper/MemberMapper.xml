@@ -7,4 +7,12 @@
         SELECT * FROM member
     </select>
 
+    <select id="findById" resultType="Member">
+        SELECT * FROM member WHERE id = #{id}
+    </select>
+
+    <select id="findByUsername" resultType="Member">
+        SELECT * FROM member WHERE username = #{username}
+    </select>
+
 </mapper>

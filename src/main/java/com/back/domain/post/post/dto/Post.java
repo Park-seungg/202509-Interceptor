@@ -10,6 +10,7 @@ public class Post {
     private String title;
     private String content;
     private int memberId;
+    private String authorName;
 
     private LocalDateTime createDate;
     private LocalDateTime modifyDate;

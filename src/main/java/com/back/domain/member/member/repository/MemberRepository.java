@@ -27,4 +27,6 @@ public interface MemberRepository {
     );
 
     List<Member> search(String kwType, String kw);
+
+    int deleteByIds(@Param("ids") List<Integer> ids);
 }

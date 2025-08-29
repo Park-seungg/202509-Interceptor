@@ -2,14 +2,15 @@
 -- CREATE DATABASE dev_db;
 -- USE dev_db;
 
-CREATE TABLE post(
-                     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-                     createDate DATETIME NOT NULL,
-                     modifyDate DATETIME NOT NULL,
-                     memberId INT UNSIGNED NOT NULL,
-                     title CHAR(100) NOT NULL,
-                     content TEXT NOT NULL,
-                     PRIMARY KEY(id)
+CREATE TABLE post
+(
+    id         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    createDate DATETIME  NOT NULL,
+    modifyDate DATETIME  NOT NULL,
+    memberId   INT UNSIGNED NOT NULL,
+    title      CHAR(100) NOT NULL,
+    content    TEXT      NOT NULL,
+    PRIMARY KEY (id)
 );
 
 INSERT INTO post
@@ -26,15 +27,16 @@ memberId = 2,
 title = '제목 2',
 content = '내용 2';
 
-CREATE TABLE member(
-                       id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-                       createDate DATETIME NOT NULL,
-                       modifyDate DATETIME NOT NULL,
-                       username CHAR(100) NOT NULL UNIQUE,
-                       `password` CHAR(100) NOT NULL,
-                       name CHAR(100) NOT NULL,
-                       email CHAR(100) NOT NULL,
-                       PRIMARY KEY(id)
+CREATE TABLE member
+(
+    id         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    createDate DATETIME  NOT NULL,
+    modifyDate DATETIME  NOT NULL,
+    username   CHAR(100) NOT NULL UNIQUE,
+    `password` CHAR(100) NOT NULL,
+    name       CHAR(100) NOT NULL,
+    email      CHAR(100) NOT NULL,
+    PRIMARY KEY (id)
 );
 
 INSERT INTO `member`
